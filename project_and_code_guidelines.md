@@ -2,7 +2,7 @@
 
 ## 1.1 Project structure
 
-New projects should follow the Android Gradle project structure that is defined on the [Android Gradle plugin user guide](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Project-Structure). The [ribot Boilerplate](https://github.com/ribot/android-boilerplate) project is a good reference to start from.
+New projects should follow the Android Gradle project structure that is defined on the [Android Gradle plugin user guide](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Project-Structure). 
 
 ## 1.2 File naming
 
@@ -20,15 +20,15 @@ Resources file names are written in __lowercase_underscore__.
 Naming conventions for drawables:
 
 
-| Asset Type   | Prefix            |		Example               |
+| Asset Type   | Prefix            |        Example               |
 |--------------| ------------------|-----------------------------|
 | Action bar   | `ab_`             | `ab_stacked.9.png`          |
-| Button       | `btn_`	            | `btn_send_pressed.9.png`    |
+| Button       | `btn_`             | `btn_send_pressed.9.png`    |
 | Dialog       | `dialog_`         | `dialog_top.9.png`          |
 | Divider      | `divider_`        | `divider_horizontal.9.png`  |
-| Icon         | `ic_`	            | `ic_star.png`               |
-| Menu         | `menu_	`           | `menu_submenu_bg.9.png`     |
-| Notification | `notification_`	| `notification_bg.9.png`     |
+| Icon         | `ic_`              | `ic_star.png`               |
+| Menu         | `menu_ `           | `menu_submenu_bg.9.png`     |
+| Notification | `notification_`    | `notification_bg.9.png`     |
 | Tabs         | `tab_`            | `tab_pressed.9.png`         |
 
 Naming conventions for icons (taken from [Android iconography guidelines](http://developer.android.com/design/style/iconography.html)):
@@ -44,7 +44,7 @@ Naming conventions for icons (taken from [Android iconography guidelines](http:/
 
 Naming conventions for selector states:
 
-| State	       | Suffix          | Example                     |
+| State        | Suffix          | Example                     |
 |--------------|-----------------|-----------------------------|
 | Normal       | `_normal`       | `btn_order_normal.9.png`    |
 | Pressed      | `_pressed`      | `btn_order_pressed.9.png`   |
@@ -135,9 +135,8 @@ See more info [here](https://source.android.com/source/code-style.html#fully-qua
 
 Fields should be defined at the __top of the file__ and they should follow the naming rules listed below.
 
-* Private, non-static field names start with __m__.
-* Private, static field names start with __s__.
-* Other fields start with a lower case letter.
+* Do not prefix any variables with __m__ or __s__.
+* Fields should start with a lower case letter.
 * Static final fields (constants) are ALL_CAPS_WITH_UNDERSCORES.
 
 Example:
@@ -146,10 +145,10 @@ Example:
 public class MyClass {
     public static final int SOME_CONSTANT = 42;
     public int publicField;
-    private static MyClass sSingleton;
-    int mPackagePrivate;
-    private int mPrivate;
-    protected int mProtected;
+    private static MyClass singleton;
+    int packagePrivate;
+    private int private;
+    protected int private;
 }
 ```
 
@@ -271,6 +270,8 @@ More info [here](https://source.android.com/source/code-style.html#limit-variabl
 
 ### 2.2.9 Logging guidelines
 
+__For SDKs__
+
 Use the logging methods provided by the `Log` class to print out error messages or other information that may be useful for developers to identify issues:
 
 * `Log.v(String tag, String msg)` (verbose)
@@ -298,6 +299,15 @@ To only show logs on debug builds:
 ```java
 if (BuildConfig.DEBUG) Log.d(TAG, "The value of x is " + x);
 ```
+__For Applications__
+Use the logging methods provided by the `Timber` class to print out error messages or other information that may be useful for developers to identify issues:
+([Timber](https://github.com/JakeWharton/timber))
+
+* `Timber.v(String msg)` (verbose)
+* `Timber.d(String msg)` (debug)
+* `Timber.i(String msg)` (information)
+* `Timber.w(String msg)` (warning)
+* `Timber.e(String msg)` (error)
 
 ### 2.2.10 Class member ordering
 
@@ -316,11 +326,11 @@ Example:
 ```java
 public class MainActivity extends Activity {
 
-	private String mTitle;
+    private String mTitle;
     private TextView mTextViewTitle;
 
     public void setTitle(String title) {
-    	mTitle = title;
+        mTitle = title;
     }
 
     @Override
@@ -344,7 +354,7 @@ If your class is extending an __Android component__ such as an Activity or a Fra
 ```java
 public class MainActivity extends Activity {
 
-	//Order matches Activity lifecycle
+    //Order matches Activity lifecycle
     @Override
     public void onCreate() {}
 
@@ -415,9 +425,9 @@ In the case of Activities the method is usually called `getStartIntent()`:
 
 ```java
 public static Intent getStartIntent(Context context, User user) {
-	Intent intent = new Intent(context, ThisActivity.class);
-	intent.putParcelableExtra(EXTRA_USER, user);
-	return intent;
+    Intent intent = new Intent(context, ThisActivity.class);
+    intent.putParcelableExtra(EXTRA_USER, user);
+    return intent;
 }
 ```
 
@@ -425,11 +435,11 @@ For Fragments it is named `newInstance()` and handles the creation of the Fragme
 
 ```java
 public static UserFragment newInstance(User user) {
-	UserFragment fragment = new UserFragment;
-	Bundle args = new Bundle();
-	args.putParcelable(ARGUMENT_USER, user);
-	fragment.setArguments(args)
-	return fragment;
+    UserFragment fragment = new UserFragment;
+    Bundle args = new Bundle();
+    args.putParcelable(ARGUMENT_USER, user);
+    fragment.setArguments(args)
+    return fragment;
 }
 ```
 
@@ -533,9 +543,9 @@ This is good:
 
 ```xml
 <TextView
-	android:id="@+id/text_view_profile"
-	android:layout_width="wrap_content"
-	android:layout_height="wrap_content" />
+    android:id="@+id/text_view_profile"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
 ```
 
 This is __bad__ :
@@ -579,7 +589,7 @@ Menu example:
 
 ```xml
 <menu>
-	<item
+    <item
         android:id="@+id/menu_done"
         android:title="Done" />
 </menu>
@@ -643,7 +653,7 @@ onView(withId(R.id.view))
 # License
 
 ```
-Copyright 2015 Ribot Ltd.
+Copyright 2016 Mobien Digital Pvt. Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
