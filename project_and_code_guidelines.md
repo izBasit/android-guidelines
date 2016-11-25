@@ -613,7 +613,7 @@ String names start with a prefix that identifies the section they belong to. For
 
 
 __Where ever applicable strings should not be hardcoded in java source file. 
-It should always come from `strings.xml`
+It should always come from `strings.xml`__
 
 
 #### 2.3.2.3 Styles and Themes
