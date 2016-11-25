@@ -327,8 +327,10 @@ Example:
 public class MainActivity extends Activity {
 
     private String title;
-    private TextView tvTitle;
-    private Spinner spType;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
+    @BindView(R.id.spType)
+    Spinner spType;
 
     public void setTitle(String title) {
         this.title = title;
@@ -487,13 +489,13 @@ __Method chain case__
 When multiple methods are chained in the same line - for example when using Builders - every call to a method should go in its own line, breaking the line before the `.`
 
 ```java
-Picasso.with(context).load("http://ribot.co.uk/images/sexyjoe.jpg").into(imageView);
+Picasso.with(context).load("http://ribot.co.uk/images/sexyjoe.jpg").into(ivProfilePic);
 ```
 
 ```java
 Picasso.with(context)
         .load("http://ribot.co.uk/images/sexyjoe.jpg")
-        .into(imageView);
+        .into(ivProfilePic);
 ```
 
 __Long parameters case__
@@ -501,13 +503,13 @@ __Long parameters case__
 When a method has many parameters or its parameters are very long, we should break the line after every comma `,`
 
 ```java
-loadPicture(context, "http://ribot.co.uk/images/sexyjoe.jpg", mImageViewProfilePicture, clickListener, "Title of the picture");
+loadPicture(context, "http://ribot.co.uk/images/sexyjoe.jpg", ivProfilePic, clickListener, "Title of the picture");
 ```
 
 ```java
 loadPicture(context,
         "http://ribot.co.uk/images/sexyjoe.jpg",
-        mImageViewProfilePicture,
+        ivProfilePic,
         clickListener,
         "Title of the picture");
 ```
@@ -544,7 +546,7 @@ This is good:
 
 ```xml
 <TextView
-    android:id="@+id/text_view_profile"
+    android:id="@+id/tvProfile"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
 ```
@@ -554,7 +556,7 @@ This is __bad__ :
 ```xml
 <!-- Don\'t do this! -->
 <TextView
-    android:id="@+id/text_view_profile"
+    android:id="@+id/tvProfile"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
 </TextView>
@@ -563,25 +565,26 @@ This is __bad__ :
 
 ### 2.3.2 Resources naming
 
-Resource IDs and names are written in __lowercase_underscore__.
+Resource IDs and names are written in __CamelCase__.
+Menu resource names are written in __lower_case__
 
 #### 2.3.2.1 ID naming
 
-IDs should be prefixed with the name of the element in lowercase underscore. For example:
+For example:
 
 
 | Element            | Prefix            |
 | -----------------  | ----------------- |
-| `TextView`           | `text_`             |
-| `ImageView`          | `image_`            |
-| `Button`             | `button_`           |
+| `TextView`           | `tvTempName`             |
+| `ImageView`          | `ivTempName`            |
+| `Button`             | `btnTempName`           |
 | `Menu`               | `menu_`             |
 
 Image view example:
 
 ```xml
 <ImageView
-    android:id="@+id/image_profile"
+    android:id="@+id/ivProfile"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
 ```
@@ -608,6 +611,9 @@ String names start with a prefix that identifies the section they belong to. For
 | `title_`             | A title, i.e. a dialog title          |
 | `action_`            | An action such as "Save" or "Create"  |
 
+
+__Where ever applicable strings should not be hardcoded in java source file. 
+It should always come from `strings.xml`
 
 
 #### 2.3.2.3 Styles and Themes
