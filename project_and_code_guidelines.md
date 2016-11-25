@@ -147,8 +147,8 @@ public class MyClass {
     public int publicField;
     private static MyClass singleton;
     int packagePrivate;
-    private int private;
-    protected int private;
+    private int variableName;
+    protected int variableName;
 }
 ```
 
@@ -326,11 +326,12 @@ Example:
 ```java
 public class MainActivity extends Activity {
 
-    private String mTitle;
-    private TextView mTextViewTitle;
+    private String title;
+    private TextView tvTitle;
+    private Spinner spType;
 
     public void setTitle(String title) {
-        mTitle = title;
+        this.title = title;
     }
 
     @Override
